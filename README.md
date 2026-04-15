@@ -10,6 +10,7 @@ The PCA9685 should drive the ULN2803A inputs, not motors directly. Tie ESP32, PC
 - ESP32 `GND` to PCA9685 `GND`
 - ESP32 `GPIO21` to PCA9685 `SDA`
 - ESP32 `GPIO22` to PCA9685 `SCL`
+- PCA9685 `OE` to `GND` or otherwise held low
 - PCA9685 `OUT0` through `OUT7` to ULN2803A `IN1` through `IN8`
 - ULN2803A `OUT1` through `OUT8` to each motor negative terminal
 - Motor positive terminals to motor supply positive
@@ -17,6 +18,13 @@ The PCA9685 should drive the ULN2803A inputs, not motors directly. Tie ESP32, PC
 - ULN2803A `COM` to motor supply positive so the internal clamp diodes can catch motor kickback
 
 The ULN2803A is a Darlington sink array, so each motor will see less than the full motor supply voltage. For high-current motors or maximum vibration strength, logic-level MOSFETs are usually better.
+
+If the serial monitor says the PCA9685 is detected but motors do not move, check the ULN2803A side with a multimeter:
+
+- PCA9685 output pin should rise when a channel is on.
+- Matching ULN2803A output pin should pull low when that input is high.
+- Motor positive should stay at the motor supply voltage.
+- Motor negative should be connected to the matching ULN2803A output, not ground directly.
 
 ## Commands
 
@@ -27,3 +35,16 @@ python -m platformio device monitor
 ```
 
 The firmware retries PCA9685 detection every 2 seconds and only runs motor patterns after the board responds at I2C address `0x40`.
+
+Serial monitor commands:
+
+```text
+help
+status
+scan
+test
+pattern
+off
+all 4095
+m 0 4095 2000
+```
