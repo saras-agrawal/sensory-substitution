@@ -17,6 +17,19 @@ The PCA9685 should drive the ULN2803A inputs, not motors directly. Tie ESP32, PC
 - ULN2803A `GND` to common ground
 - ULN2803A `COM` to motor supply positive so the internal clamp diodes can catch motor kickback
 
+For a DIP ULN2803A, the pin mapping is:
+
+- `IN1` pin 1 -> `OUT1` pin 18
+- `IN2` pin 2 -> `OUT2` pin 17
+- `IN3` pin 3 -> `OUT3` pin 16
+- `IN4` pin 4 -> `OUT4` pin 15
+- `IN5` pin 5 -> `OUT5` pin 14
+- `IN6` pin 6 -> `OUT6` pin 13
+- `IN7` pin 7 -> `OUT7` pin 12
+- `IN8` pin 8 -> `OUT8` pin 11
+- `GND` pin 9 -> common ground
+- `COM` pin 10 -> motor supply positive
+
 The ULN2803A is a Darlington sink array, so each motor will see less than the full motor supply voltage. For high-current motors or maximum vibration strength, logic-level MOSFETs are usually better.
 
 If the serial monitor says the PCA9685 is detected but motors do not move, check the ULN2803A side with a multimeter:
