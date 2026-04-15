@@ -44,7 +44,7 @@ If the serial monitor says the PCA9685 is detected but motors do not move, check
 ```powershell
 python -m platformio run
 python -m platformio run --target upload
-python -m platformio device monitor
+python tools\serial_console.py
 ```
 
 The firmware retries PCA9685 detection every 2 seconds and only runs motor patterns after the board responds at I2C address `0x40`.
