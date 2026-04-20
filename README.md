@@ -11,13 +11,13 @@ The PCA9685 should drive the ULN2803A inputs, not motors directly. Tie ESP32, PC
 - ESP32 `GPIO21` to PCA9685 `SDA`
 - ESP32 `GPIO22` to PCA9685 `SCL`
 - PCA9685 `OE` to `GND` or otherwise held low
-- PCA9685 `OUT0` through `OUT7` to ULN2803A `IN1` through `IN8`
-- ULN2803A `OUT1` through `OUT8` to each motor negative terminal
+- PCA9685 `OUT0` through `OUT15` to two ULN2803A input banks, or to as many driver inputs as you have populated
+- ULN2803A outputs to each motor negative terminal
 - Motor positive terminals to motor supply positive
 - ULN2803A `GND` to common ground
 - ULN2803A `COM` to motor supply positive so the internal clamp diodes can catch motor kickback
 
-For a DIP ULN2803A, the pin mapping is:
+For each DIP ULN2803A, the pin mapping is:
 
 - `IN1` pin 1 -> `OUT1` pin 18
 - `IN2` pin 2 -> `OUT2` pin 17
@@ -60,4 +60,5 @@ pattern
 off
 all 4095
 m 0 4095 2000
+m 15 4095 2000
 ```
