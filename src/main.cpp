@@ -9,8 +9,11 @@ const uint8_t SDA_PIN = 21;
 const uint8_t SCL_PIN = 22;
 const uint16_t PWM_FREQ = 500;
 
-const uint8_t NUM_MOTORS = 8;
-const uint8_t motorChannels[NUM_MOTORS] = {0, 1, 2, 3, 4, 5, 6, 7};
+const uint8_t NUM_MOTORS = 16;
+const uint8_t motorChannels[NUM_MOTORS] = {
+  0, 1, 2, 3, 4, 5, 6, 7,
+  8, 9, 10, 11, 12, 13, 14, 15,
+};
 
 const uint16_t MOTOR_OFF = 0;
 const uint16_t MOTOR_LOW = 1200;
